@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class DestroyOnGround : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private LayerMask floorLayer;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        int x = 1 << collision.gameObject.layer;
+
+        if (x == floorLayer.value)
+        { 
 
         GetComponent<Collider2D>().enabled = false;
 
         GetComponentInParent<PrefabManager>().UpdatePlayerPosition(transform.position);
 
         Destroy(gameObject);
+        }
     }
 }
