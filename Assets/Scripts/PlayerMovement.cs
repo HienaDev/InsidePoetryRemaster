@@ -5,33 +5,43 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    // PHYSICS VARIABLES
     private Rigidbody2D rb;
 
+    // MOVEMENT VARIABLES
     [SerializeField] private float moveSpeed;
-
     private Vector2 speed;
+    private bool canMove;
+
+    // ANIMATION VARIABLES
     private Animator animator;
 
-    private float chargeThrow;
+    // CHARGING THROW VARIABLES
     [SerializeField] private float chargeSpeedPercent;
+    private float chargeThrow;
     private float chargeIncrement;
     private float maxCharge;
-
     private bool charging;
 
+    // THROWING BALL VARIABLES
+        // The ball prefab
     [SerializeField] private GameObject teleportBall;
+        // Where we keep the balls so they arent children of the player
     private GameObject prefabManager;
+        // Where the ball spawns
     [SerializeField] private GameObject firePoint;
+        // The arm's pivot and object
     [SerializeField] private GameObject arm;
+        // Force on both axis defined in the editor
     [SerializeField] private float throwForceX;
-    [SerializeField] private float minForceX;
     [SerializeField] private float throwForceY;
+        // Save minimum values in case the player just taps the charge button
+    [SerializeField] private float minForceX;
     [SerializeField] private float minForceY;
-
+        // Save current ball so we only have 1 ball active
     private GameObject currentBall;
 
-    private bool canMove;
+    
 
     // Start is called before the first frame update
     void Start()
