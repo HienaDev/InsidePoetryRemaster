@@ -41,7 +41,9 @@ public class PlayerMovement : MonoBehaviour
         // Save current ball so we only have 1 ball active
     private GameObject currentBall;
 
-    
+    // SOUND VARIABLES
+        // The sound controller
+    private PlayerSounds playerSounds;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         currentBall = null;
 
         canMove = true;
+
+        playerSounds = GetComponent<PlayerSounds>();
     }
 
     // Update is called once per frame
@@ -177,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
     public void UpdatePosition(Vector3 position)
     { 
         transform.position = position;
+        playerSounds.PlayTeleportSound();
         animator.SetTrigger("Teleport");
     }
 

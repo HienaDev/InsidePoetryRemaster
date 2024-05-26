@@ -13,11 +13,11 @@ TagManager:
   - UI
   - Ground
   - GroundCollider
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ball
+  - PlayerHead
+  - EndGame
+  - Player
+  - Teleport
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 142324097
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
