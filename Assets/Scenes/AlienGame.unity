@@ -97550,7 +97550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.24705882}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.77254903}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -129854,8 +129854,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -7.393303, y: 280.17456, z: 0}
-    m_Extent: {x: 261.9611, y: 2393.0247, z: 0}
+    m_Center: {x: -7.4056473, y: 280.17944, z: 0}
+    m_Extent: {x: 261.95856, y: 2393.0247, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -131712,7 +131712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1550237160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131735,7 +131735,7 @@ Transform:
   m_GameObject: {fileID: 1550237159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.6, y: 3329.322, z: 4.5604067}
+  m_LocalPosition: {x: 1788.4, y: 3289.9, z: 4.5604067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
