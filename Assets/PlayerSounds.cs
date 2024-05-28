@@ -34,10 +34,13 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayWalkSound()
     {
-        audioSourceWalk.clip = walk[Random.Range(0, walk.Length)];
+        if (GetComponent<Rigidbody2D>().velocity.y == 0)
+        {
+            audioSourceWalk.clip = walk[Random.Range(0, walk.Length)];
 
-        audioSourceWalk.pitch = Random.Range(0.90f, 1.10f);
+            audioSourceWalk.pitch = Random.Range(0.90f, 1.10f);
 
-        audioSourceWalk.Play();
+            audioSourceWalk.Play();
+        }
     }
 }
