@@ -33,7 +33,7 @@ public class LeaderboardManager : MonoBehaviour
         // Q: How do I reference my own leaderboard?
         // A: Leaderboards.<NameOfTheLeaderboard>
 
-        Leaderboards.AlienGame.GetEntries(entries =>
+        Leaderboards.AlienJungle.GetEntries(entries =>
         {
             foreach (var t in _entryTextObjects)
                 t.text = "";
@@ -60,7 +60,7 @@ public class LeaderboardManager : MonoBehaviour
 
         LeaderboardCreator.ResetPlayer();
 
-        Leaderboards.AlienGame.UploadNewEntry(_usernameInputField.text, Score, isSuccessful =>
+        Leaderboards.AlienJungle.UploadNewEntry(_usernameInputField.text, Score, isSuccessful =>
         {
 
             if (isSuccessful)
