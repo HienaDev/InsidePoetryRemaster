@@ -48,7 +48,7 @@ public class TeleportNewBiome : MonoBehaviour
         }
 
         Destroy(ball);
-        ballAnimation.SetActive(true);
+        //ballAnimation.SetActive(true);
         animator.SetTrigger("Portal");
     }
 

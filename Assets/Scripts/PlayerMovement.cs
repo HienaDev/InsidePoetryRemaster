@@ -91,12 +91,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (!charging && canMove)
         { 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 speed.x = moveSpeed;
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 speed.x = -moveSpeed;
             }
