@@ -34,7 +34,6 @@ public class PlayerSounds : MonoBehaviour
 
     public void PlayWalkSound()
     {
-        Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
         if (GetComponent<Rigidbody2D>().velocity.y < 0.1 && GetComponent<Rigidbody2D>().velocity.y > -0.1)
         {
             audioSourceWalk.clip = walk[Random.Range(0, walk.Length)];

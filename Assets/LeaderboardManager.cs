@@ -19,26 +19,34 @@ public class LeaderboardManager : MonoBehaviour
     private int Score => timer.TimeFinal;
     // ------------------------------------------------------------
 
+    [SerializeField] private bool menu = false;
+
     private void Start()
     {
-        LoadEntries();
+        StartCoroutine(LoadEntries());
 
-        gameObject.SetActive(false);
+        
     }
 
 
 
-    private void LoadEntries()
+    private IEnumerator LoadEntries()
     {
         // Q: How do I reference my own leaderboard?
         // A: Leaderboards.<NameOfTheLeaderboard>
 
+        Debug.Log("entries loadead");
+
+        foreach (var t in _entryTextObjects)
+            t.text = "";
+
         Leaderboards.AlienJungle.GetEntries(entries =>
         {
-            foreach (var t in _entryTextObjects)
-                t.text = "";
+            
 
             var length = Mathf.Min(_entryTextObjects.Length, entries.Length);
+
+            Debug.Log(entries.Length);
 
             string tempScore;
 
@@ -52,6 +60,14 @@ public class LeaderboardManager : MonoBehaviour
                 _entryTextObjects[i].text = $"{entries[i].Rank}. {entries[i].Username} - {tempScore}";
             }
         });
+
+       
+        yield return null;
+
+        if (!menu)
+            gameObject.SetActive(false);
+
+
     }
 
     public void UploadEntry()
@@ -64,7 +80,7 @@ public class LeaderboardManager : MonoBehaviour
         {
 
             if (isSuccessful)
-                LoadEntries();
+                StartCoroutine(LoadEntries());
         });
     }
 }

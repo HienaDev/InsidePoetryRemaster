@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         // The sound controller
     private PlayerSounds playerSounds;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
 
         MovePlayer();
 

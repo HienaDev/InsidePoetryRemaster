@@ -11,21 +11,39 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string nameMenuScene;
     [SerializeField] private AudioMixer audioMixer;
 
+    [SerializeField] private GameObject menuObject;
+
+    [SerializeField] private PlayerMovement playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // We do this so leaderboard starts loading
+        menuObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuObject.SetActive(!menuObject.activeSelf);
+
+            if (menuObject.activeSelf) Time.timeScale = 0f;
+            else Time.timeScale = 1f;
+
+            playerMovement.enabled = !menuObject.activeSelf;
+        }
     }
 
     public void LoadMenu() => SceneManager.LoadScene(nameMenuScene);
 
-    public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
     public void Quit()
     {
