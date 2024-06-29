@@ -12,6 +12,7 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField] private TMP_Text[] _entryTextObjects;
     [SerializeField] private TMP_InputField _usernameInputField;
 
+
     // Make changes to this section according to how you're storing the player's score:
     // ------------------------------------------------------------
     [SerializeField] private Timer timer;
@@ -21,16 +22,22 @@ public class LeaderboardManager : MonoBehaviour
 
     [SerializeField] private bool menu = false;
 
+    [SerializeField] private float distance;
+
     private void Start()
     {
-        StartCoroutine(LoadEntries());
+
+
+        transform.position += new Vector3(distance, 0f, 0f);
+
+        LoadEntries();
 
         
     }
 
 
 
-    private IEnumerator LoadEntries()
+    private void LoadEntries()
     {
         // Q: How do I reference my own leaderboard?
         // A: Leaderboards.<NameOfTheLeaderboard>
@@ -38,7 +45,7 @@ public class LeaderboardManager : MonoBehaviour
         Debug.Log("entries loadead");
 
         foreach (var t in _entryTextObjects)
-            t.text = "";
+            t.text = "Loading...";
 
         Leaderboards.AlienJungle.GetEntries(entries =>
         {
@@ -50,22 +57,31 @@ public class LeaderboardManager : MonoBehaviour
 
             string tempScore;
 
-            for (int i = 0; i < length; i++)
-            { 
+            for (int i = 0; i < _entryTextObjects.Length; i++)
+            {
 
-                tempScore = string.Format("{0:00} : {1:00}", entries[i].Score / 60, (entries[i].Score - ((entries[i].Score / 60) * 60)));
+                if (i >= entries.Length)
+                    _entryTextObjects[i].text= " ";
+                else
+                {
+                    tempScore = string.Format("{0:00} : {1:00}", entries[i].Score / 60, (entries[i].Score - ((entries[i].Score / 60) * 60)));
 
-                Debug.Log((entries[i].Score / 60));
+                    Debug.Log((entries[i].Score / 60));
 
-                _entryTextObjects[i].text = $"{entries[i].Rank}. {entries[i].Username} - {tempScore}";
+                    _entryTextObjects[i].text = $"{entries[i].Rank}. {entries[i].Username} - {tempScore}";
+                }
+                
             }
         });
 
        
-        yield return null;
-
         if (!menu)
+        {
+            transform.position -= new Vector3(distance, 0f, 0f);
             gameObject.SetActive(false);
+            menu = true;
+        }
+            
 
 
     }
@@ -74,13 +90,16 @@ public class LeaderboardManager : MonoBehaviour
     {
         Debug.Log(Score);
 
+        foreach (var t in _entryTextObjects)
+            t.text = "Loading...";
+
         LeaderboardCreator.ResetPlayer();
 
         Leaderboards.AlienJungle.UploadNewEntry(_usernameInputField.text, Score, isSuccessful =>
         {
 
             if (isSuccessful)
-                StartCoroutine(LoadEntries());
+                LoadEntries();
         });
     }
 }
