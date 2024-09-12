@@ -9,9 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     // MOVEMENT VARIABLES
+    [SerializeField] private KeyCode left = KeyCode.A;
+    [SerializeField] private KeyCode right = KeyCode.D;
+    [SerializeField] private KeyCode shoot = KeyCode.Space;
     [SerializeField] private float moveSpeed;
     private Vector2 speed;
     private bool canMove;
+
+    // CAMERA
+    [SerializeField] private Camera playerCamera;
+    public Camera PlayerCamera { get { return playerCamera; } }
 
     // ANIMATION VARIABLES
     private Animator animator;
@@ -27,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         // The ball prefab
     [SerializeField] private GameObject teleportBall;
         // Where we keep the balls so they arent children of the player
-    private GameObject prefabManager;
+    [SerializeField] private GameObject prefabManager;
         // Where the ball spawns
     [SerializeField] private GameObject firePoint;
         // The arm's pivot and object
@@ -60,8 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
         charging = false;
 
-        prefabManager = FindObjectOfType<PrefabManager>().gameObject;
-
         currentBall = null;
 
         canMove = true;
@@ -91,12 +96,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (!charging && canMove)
         { 
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(right) || Input.GetKey(right))
             {
                 speed.x = moveSpeed;
             }
 
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(left) || Input.GetKey(left))
             {
                 speed.x = -moveSpeed;
             }
@@ -116,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ChargeThrow()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(shoot))
         {
             arm.SetActive(true);
             if (chargeThrow < maxCharge)
@@ -128,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
             charging = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(shoot))
         {
             ThrowBall(chargeThrow);
             ResetArmRotation();

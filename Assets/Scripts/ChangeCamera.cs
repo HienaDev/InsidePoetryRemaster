@@ -14,12 +14,12 @@ public class ChangeCamera : MonoBehaviour
         // If we contact with the layer we update the player's position and destroy the ball
         if (x == headMask.value)
         {
-            Camera.main.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10f);
+            collision.gameObject.GetComponentInParent<PlayerMovement>().PlayerCamera.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10f);
 
         }
         else if (x == ballMask.value)
         {
-            Camera.main.transform.position = new Vector3( gameObject.transform.position.x, gameObject.transform.position.y, -10f);
+            collision.gameObject.GetComponentInParent<PrefabManager>().Player.PlayerCamera.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10f);
 
         }
 

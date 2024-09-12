@@ -203,4 +203,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerIntensity: 0.3
-  flickerSpeed: {x: 0.05, y: 0.2}
+  flickerSpeed: {x: 0.2, y: 0.4}

@@ -7,6 +7,7 @@ public class PrefabManager : MonoBehaviour
 {
 
     [SerializeField] private PlayerMovement player;
+    public PlayerMovement Player {  get { return player; } }
 
 
     /// <summary>
