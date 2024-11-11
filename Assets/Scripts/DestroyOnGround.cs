@@ -10,12 +10,12 @@ public class DestroyOnGround : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -33,3 +33,10 @@ public class DestroyOnGround : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
+

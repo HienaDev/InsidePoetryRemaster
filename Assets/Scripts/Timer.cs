@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (player.transform.position.y > 240)
+        if (player.transform.position.y > 240 && !gameStart)
             gameStart = true;
 
         //Debug.Log(timer);

@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject teleportBall;
         // Where we keep the balls so they arent children of the player
     [SerializeField] private GameObject prefabManager;
+    public GameObject PrefabManager { get { return prefabManager; } }   
         // Where the ball spawns
     [SerializeField] private GameObject firePoint;
         // The arm's pivot and object
@@ -47,14 +48,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minForceY;
         // Save current ball so we only have 1 ball active
     private GameObject currentBall;
+    private bool canShoot = true;
 
     // SOUND VARIABLES
         // The sound controller
     private PlayerSounds playerSounds;
 
+    // DEV VARIABLES
+    // hold last play position
+    private Vector2 posBeforeTP;
+
     // Start is called before the first frame update
     void Start()
     {
+        posBeforeTP = Vector2.zero;
         rb = GetComponent<Rigidbody2D>();
         speed = Vector2.zero;
 
@@ -77,10 +84,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cheats();
 
         MovePlayer();
 
-        if (currentBall == null)
+        if (canShoot)
             ChargeThrow();
 
         FlipPlayer();
@@ -88,6 +96,14 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimations();
 
 
+    }
+
+    private void Cheats()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            transform.position = posBeforeTP;
+        }
     }
     
     private void MovePlayer()
@@ -117,12 +133,16 @@ public class PlayerMovement : MonoBehaviour
         currentBall.GetComponent<Rigidbody2D>().velocity = new Vector3( Mathf.Max(minForceX, chargeThrow * throwForceX) * transform.right.x, 
                                                                         Mathf.Max(minForceY, chargeThrow * throwForceY)
                                                                         , 0f);
+
+        canShoot = false;
     }
 
     private void ChargeThrow()
     {
+
         if (Input.GetKey(shoot))
         {
+
             arm.SetActive(true);
             if (chargeThrow < maxCharge)
             {
@@ -184,9 +204,12 @@ public class PlayerMovement : MonoBehaviour
 
 
     public void UpdatePosition(Vector3 position)
-    { 
+    {
+        posBeforeTP = transform.position;
+        canShoot = true;
         transform.position = position;
         playerSounds.PlayTeleportSound();
+        GetComponent<SpriteRenderer>().enabled = true; 
         animator.SetTrigger("Teleport");
     }
 

@@ -73,5 +73,13 @@ public class Cat : MonoBehaviour
         CatSound();
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(positionA.position, 3f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(positionB.position, 3f);
+    }
 
 }
