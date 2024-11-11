@@ -10,12 +10,17 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private string nameMenuScene;
     [SerializeField] private AudioMixer audioMixer;
+
+    [SerializeField] private GameObject menuObject;
+
+    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject menuParent;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // We do this so leaderboard starts loading
+        menuObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,19 +28,13 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            menuParent.SetActive(!menuParent.activeSelf);
+            menuObject.SetActive(!menuObject.activeSelf);
 
+            if (menuObject.activeSelf) Time.timeScale = 0f;
+            else Time.timeScale = 1f;
 
-            if (menuParent.activeSelf)
-            {
-                Time.timeScale = 0.0f;
-            }
-            else
-            {
-                Time.timeScale = 1.0f;
-            }
+            playerMovement.enabled = !menuObject.activeSelf;
         }
-
     }
 
     public void LoadMenu() => SceneManager.LoadScene(nameMenuScene);
@@ -45,6 +44,7 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 
     public void Quit()
     {

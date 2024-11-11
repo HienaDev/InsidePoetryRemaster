@@ -23,7 +23,11 @@ public class EndGame : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
+        
+    }
+
+    public void ActivateEnding()
+    {
         if (cheater)
             cheated.SetActive(true);
         else

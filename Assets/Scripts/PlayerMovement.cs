@@ -86,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Cheats();
 
+        
+
         MovePlayer();
 
         if (canShoot)

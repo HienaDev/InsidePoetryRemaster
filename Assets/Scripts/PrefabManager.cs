@@ -19,6 +19,11 @@ public class PrefabManager : MonoBehaviour
     /// <param name="position">Position to update the player to</param>
     public void UpdatePlayerPosition(Vector3 position)
     {
+        //player could be deactivated because of teleport
+        player.gameObject.SetActive(true);
+
+
+        player.UpdatePosition(new Vector3 (position.x, position.y + 20f, position.z));
         if (!player.gameObject.activeSelf)
         {
             player.gameObject.SetActive(true);
