@@ -15,6 +15,7 @@ public class TeleportNewBiome : MonoBehaviour
     [SerializeField] private TeleportToJungle teleportScript;
     private GameObject prefabManager;
 
+    [SerializeField] private bool endingPortal;
     [SerializeField] private UnityEvent eventToTrigger;
 
     [SerializeField] private Sprite alienSprite;
@@ -41,7 +42,6 @@ public class TeleportNewBiome : MonoBehaviour
     {
         ball = collision.gameObject;//.transform.position = newBiomeTeleportRoot.position;
 
-        if (ball.GetComponent<PlayerMovement>() != null) alien = true;
 
 
         StartCoroutine(TravelToPoint());
@@ -55,29 +55,21 @@ public class TeleportNewBiome : MonoBehaviour
         Debug.Log("inital positin: " + initialPosition);
         Debug.Log("Final position: " + pivotRotation.position);
 
-        ballAnimation.GetComponent<SpriteRenderer>().enabled = true;
 
-        if (!alien)
-        {
-            ballAnimation.GetComponent<SpriteRenderer>().sprite = ballSprite;
-            Destroy(ball);
-        }  
-        else
-        {
-            ballAnimation.GetComponent<SpriteRenderer>().sprite = alienSprite;
-            ball.SetActive(false);
-        }
 
-        
+
+
 
         while (lerpValue < 1)
         {
             lerpValue += Time.deltaTime;
-            ballAnimation.transform.position = Vector3.Lerp(initialPosition, pivotRotation.position, lerpValue);
-            ballAnimation.transform.Rotate(0f, 0f, 1f);
+            ball.transform.position = Vector3.Lerp(initialPosition, pivotRotation.position, lerpValue);
+            ball.transform.Rotate(0f, 0f, 1f);
             yield return null;
         }
+
         prefabManager = ball.transform.parent.gameObject;
+
         yield return null;
         Destroy(ball);
         //Instantiate(ballAnimation, pivotRotation);
@@ -100,11 +92,15 @@ public class TeleportNewBiome : MonoBehaviour
 
     public void Teleport()
     {
-        teleportScript.Teleport(prefabManager);
+        if (!endingPortal)
+            teleportScript.Teleport(prefabManager);
+
         prefabManager = null;
 
         ballAnimation.GetComponent<SpriteRenderer>().enabled = false;
-        eventToTrigger.Invoke();
+
+        if (endingPortal) { eventToTrigger.Invoke(); }
+
 
         alien = false;
     }

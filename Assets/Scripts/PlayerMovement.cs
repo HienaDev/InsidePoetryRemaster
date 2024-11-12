@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         currentBall.GetComponent<Rigidbody2D>().velocity = new Vector3( Mathf.Max(minForceX, chargeThrow * throwForceX) * transform.right.x, 
                                                                         Mathf.Max(minForceY, chargeThrow * throwForceY)
                                                                         , 0f);
-
+        posBeforeTP = transform.position;
         canShoot = false;
     }
 
@@ -207,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdatePosition(Vector3 position)
     {
-        posBeforeTP = transform.position;
         canShoot = true;
         transform.position = position;
         playerSounds.PlayTeleportSound();

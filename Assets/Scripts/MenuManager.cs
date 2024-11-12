@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string nameMenuScene;
     [SerializeField] private AudioMixer audioMixer;
 
-    [SerializeField] private GameObject menuObject;
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject menuParent;
@@ -20,7 +19,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         // We do this so leaderboard starts loading
-        menuObject.SetActive(false);
+        menuParent.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,12 +27,12 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
-            menuObject.SetActive(!menuObject.activeSelf);
+            menuParent.SetActive(!menuParent.activeSelf);
 
-            if (menuObject.activeSelf) Time.timeScale = 0f;
+            if (menuParent.activeSelf) Time.timeScale = 0f;
             else Time.timeScale = 1f;
 
-            playerMovement.enabled = !menuObject.activeSelf;
+            playerMovement.enabled = !menuParent.activeSelf;
         }
     }
 

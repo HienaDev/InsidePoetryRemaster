@@ -21,11 +21,15 @@ public class ChangeGravityWithSpeed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.y < 0f)
+        if(rb.gravityScale > 0)
         {
-            rb.gravityScale = extraGravity;
+            if (rb.velocity.y < 0f)
+            {
+                rb.gravityScale = extraGravity;
+            }
+            else
+                rb.gravityScale = gravity;
         }
-        else
-            rb.gravityScale = gravity;
+        
     }
 }
